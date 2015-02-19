@@ -40,7 +40,7 @@ int main(void)
     fp = fopen(STOREDFUCKS, "r+b");
     if (fp == NULL)
     {
-        printf("File \"%s\" doesn't exist, creating it.\n", STOREDFUCKS);
+        //printf("File \"%s\" doesn't exist, creating it.\n", STOREDFUCKS);
         fp = fopen(STOREDFUCKS, "w+b");
     }
     get_fucks(fp, &fucks);

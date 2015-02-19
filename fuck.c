@@ -31,7 +31,7 @@ void store_fucks(FILE *fp, unsigned long *fucks)
     rewind(fp);
     if (fwrite(fucks, sizeof(*fucks), 1, fp) != 1)
     {
-        printf("writing error\n");
+        printf("writing error on \"%s\" \n", STOREDFUCKS);
         return;
     }
     //printf("writing %d to file\n", *fucks);
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     fp = fopen(STOREDFUCKS, "r+b");
     if (fp == NULL)
     {
-        printf("File \"%s\" doesn't exist, creating it.\n", STOREDFUCKS);
+        //printf("File \"%s\" doesn't exist, creating it.\n", STOREDFUCKS);
         fp = fopen(STOREDFUCKS, "w+b");
     }
     get_fucks(fp, &fucks);
