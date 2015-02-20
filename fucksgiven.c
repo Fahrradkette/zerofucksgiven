@@ -1,9 +1,6 @@
-/* TODO
-check for "/tmp/accumulatedfucks" existence and readabilty
-read number
-print containing number
-else print 0
-
+/*
+Tells you how much you care.
+Also prints out the number of stored fucks in /tmp/accumulatedfucks
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,14 +24,14 @@ int main(void)
     fp = fopen(STOREDFUCKS, "r+b");
     if (fp == NULL)
     {
-        printf("Zero fucks given!");
+        printf("Zero fucks given!\n");
         return EXIT_SUCCESS;
     }
     get_fucks(fp, &fucks);
     switch (fucks)
     {
-        case 0: printf("Zero fucks given!\n"); break;
-        case 1: printf("One single fuck given!\n"); break;
+        case 0: printf("Not even a single one!\n"); break;
+        case 1: printf("One little fuck given!\n"); break;
         default : printf("%d fucks given!\n", fucks);
     }
     fclose(fp);

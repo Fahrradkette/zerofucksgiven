@@ -1,9 +1,9 @@
 /*
-Adds up all the fucks you utter and stores them in /tmp/accumulatedfucks
+Forgives you all the fucks you uttered.
+Also empties /tmp/accumulatedfucks.
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define STOREDFUCKS "/tmp/accumulatedfucks"
 
@@ -22,38 +22,28 @@ void store_fucks(FILE *fp, unsigned long *fucks)
     rewind(fp);
     if (fwrite(fucks, sizeof(*fucks), 1, fp) != 1)
     {
-        printf("writing error on \"%s\" \n", STOREDFUCKS);
+        printf("writing error\n");
         return;
     }
 }
 
-int count_fucks(int argc, char **argv)
-{
-    int i;
-    int count = 1;
-    for (i=1; i<argc; i++)
-    {
-        char *slice = argv[i];
-        while (slice = strstr(slice, "fuck\0"))
-        {
-            slice += 5;
-            count += 1;
-        }
-    }
-    return count;
-}
-
-int main(int argc, char **argv)
+int main(void)
 {
     unsigned long fucks;
     FILE *fp;
-    if ((fp = fopen(STOREDFUCKS, "r+b")) == NULL)
+    fp = fopen(STOREDFUCKS, "r+b");
+    if (fp == NULL)
     {
-        // file didn't exist
         fp = fopen(STOREDFUCKS, "w+b");
     }
     get_fucks(fp, &fucks);
-    fucks += count_fucks(argc, argv);
+    switch (fucks)
+    {
+        case 0 : printf("You shall be forgiven!\n"); break;
+        case 1 : printf("Forgiving you for one lonely fuck.\n"); break;
+        default : printf("All the %d f-words are forgiven.\n", fucks);
+    }
+    fucks = 0;
     store_fucks(fp, &fucks);
     fclose(fp);
     return EXIT_SUCCESS;
